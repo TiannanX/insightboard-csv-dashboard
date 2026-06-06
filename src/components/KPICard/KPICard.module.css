@@ -1,0 +1,50 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  animation: slideUp 400ms ease-out both;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.valuePositive {
+  color: var(--color-success);
+}
+
+.valueNegative {
+  color: var(--color-error);
+}
+
+.valueNeutral {
+  color: var(--color-primary);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-left: var(--space-2);
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .value {
+    font-size: 1.5rem;
+  }
+}
