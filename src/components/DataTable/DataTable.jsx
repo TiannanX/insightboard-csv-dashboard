@@ -125,7 +125,7 @@ export function DataTable({ data, style }) {
             />
           </div>
           <span className={styles.tableInfo}>
-            Showing {displayData.length} of {filteredData.length} records
+            Previewing {displayData.length} of {filteredData.length} matching records
           </span>
         </div>
       </div>

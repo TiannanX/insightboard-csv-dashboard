@@ -1,6 +1,20 @@
 # InsightBoard CSV Dashboard
 
-Turn your CSV data into a beautiful dashboard in seconds. No uploads, no servers, no login — just drag, drop, and explore.
+InsightBoard is a local-first React starter that turns a sales-style CSV file into KPI cards, charts, rule-based insights, a searchable data table, and an exportable Markdown summary.
+
+No backend. No database. No login. No paid APIs. Your data stays in the browser.
+
+## Project Overview
+
+This project is built as a polished open-source starter and freelance portfolio demo for small business, finance, student, and operations dashboards. It shows how to parse local CSV files safely, validate rows, derive metrics, visualize trends, and export a useful report without sending data to a server.
+
+## Live Demo
+
+Live demo URL: `TODO: add deployed Vercel URL`
+
+## GitHub Repository
+
+Repository URL: `https://github.com/TiannanX/insightboard-csv-dashboard`
 
 ## Features
 
@@ -12,14 +26,7 @@ Turn your CSV data into a beautiful dashboard in seconds. No uploads, no servers
 - **Export Summary** — Download dashboard summary as a Markdown file
 - **100% Local** — All data processing happens in your browser. Nothing is uploaded.
 - **Responsive** — Works on desktop, tablet, and mobile
-
-## Live Demo
-
-Live demo URL: `TODO: add deployed Vercel URL`
-
-## GitHub Repository
-
-Repository URL: `https://github.com/TiannanX/insightboard-csv-dashboard`
+- **Validation Warnings** — Invalid rows are skipped with clear user-facing notes
 
 ## Tech Stack
 
@@ -89,7 +96,7 @@ A sample CSV file is included at `public/sample-sales-data.csv`.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/insightboard-csv-dashboard.git
+git clone https://github.com/TiannanX/insightboard-csv-dashboard.git
 cd insightboard-csv-dashboard
 
 # Install dependencies
@@ -115,30 +122,25 @@ npm run preview
 
 ## Deploying to Vercel
 
-### Option 1: Vercel CLI
+Vercel can deploy this as a standard Vite app. No environment variables are required.
 
-```bash
-# Install Vercel CLI globally
-npm install -g vercel
+### Option 1: GitHub Integration
 
-# Login to Vercel
-vercel login
-
-# Deploy
-vercel
-
-# For production deployment
-vercel --prod
-```
-
-### Option 2: GitHub Integration
-
-1. Push this project to a GitHub repository
+1. Push this project to GitHub
 2. Go to [vercel.com](https://vercel.com)
 3. Click "New Project"
-4. Import your GitHub repository
-5. Vercel auto-detects Vite — no configuration needed
-6. Click "Deploy"
+4. Import the repository
+5. Keep the auto-detected Vite settings
+6. Deploy
+
+### Option 2: Vercel CLI
+
+```bash
+npm install -g vercel
+vercel login
+vercel
+vercel --prod
+```
 
 ### Option 3: Drag & Drop
 
@@ -146,14 +148,25 @@ vercel --prod
 2. Go to [vercel.com/drop](https://vercel.com/drop)
 3. Drag the `dist` folder to the page
 
+Build note: Recharts can make the production JavaScript chunk larger than Vite's default warning threshold. The current build is valid; optional chart code-splitting can be handled in a future V1.3 pass.
+
 ## Suggested Screenshots
 
-After deploying, consider adding these screenshots to your README:
+For the README, portfolio page, or LinkedIn post, capture:
 
-1. **Hero/Upload Section** — Show the clean upload interface
-2. **Dashboard View** — KPI cards, charts, and insights
-3. **Data Table** — Search and sort in action
-4. **Mobile View** — Responsive design on phone
+1. **Hero and Upload** — Show the value proposition plus CSV/dropzone area.
+2. **Dashboard Overview** — KPI cards and first chart row with demo data loaded.
+3. **Insights and Export** — Rule-based insights plus Markdown export button.
+4. **Data Explorer** — Search and sort in action.
+5. **Mobile View** — Responsive stacked dashboard.
+
+Suggested 30-second recording flow:
+
+1. Open the live demo.
+2. Click "View demo dataset".
+3. Point out KPIs, charts, local insights, and row preview.
+4. Search or sort the table.
+5. Export the Markdown summary.
 
 ## Future Roadmap
 
@@ -172,7 +185,11 @@ Potential enhancements for this starter:
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit issues and pull requests.
+Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for the short contribution guide.
+
+## Portfolio Notes
+
+See [PORTFOLIO.md](./PORTFOLIO.md) for a concise case-study version of this project.
 
 ## License
 

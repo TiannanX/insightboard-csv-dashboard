@@ -54,9 +54,16 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error, warnings
   };
 
   return (
-    <section className={styles.uploadSection}>
+    <section className={styles.uploadSection} id="upload-csv" aria-labelledby="upload-title">
       <div className={`container`}>
         <div className={styles.uploadCard}>
+          <div className={styles.uploadHeader}>
+            <p className={styles.uploadKicker}>Start with your data</p>
+            <h2 className={styles.uploadTitle} id="upload-title">Upload a CSV or preview the demo</h2>
+            <p className={styles.uploadDescription}>
+              Use the sales schema below to generate KPIs, charts, local insights, and an exportable summary.
+            </p>
+          </div>
           <div
             className={`${styles.dropzone} ${isDragActive ? styles.dropzoneActive : ''}`}
             onDragEnter={handleDragEnter}
@@ -88,7 +95,7 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error, warnings
               or <span className={styles.dropzoneLink}>browse</span> to choose a file
             </p>
             <p className={styles.schemaHint}>
-              Required columns: {REQUIRED_COLUMNS.join(', ')}
+              Required: {REQUIRED_COLUMNS.join(', ')}
             </p>
             <input
               ref={fileInputRef}

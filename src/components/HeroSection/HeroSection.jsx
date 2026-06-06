@@ -1,79 +1,52 @@
 import styles from './HeroSection.module.css';
 
-export function HeroSection() {
+const FEATURES = [
+  'Local-first CSV parsing',
+  'KPI and chart generation',
+  'Rule-based insights',
+  'Exportable summary',
+];
+
+export function HeroSection({ onLoadDemo }) {
   return (
     <section className={styles.hero}>
       <div className={`container ${styles.heroContent}`}>
+        <p className={styles.heroEyebrow}>Open-source CSV dashboard starter</p>
         <h1 className={styles.heroTitle}>
-          Turn your CSV data into a{' '}
-          <span className={styles.heroTitleAccent}>beautiful dashboard</span>
+          Upload a CSV. Get KPIs, charts, insights, and a clean summary.
         </h1>
         <p className={styles.heroSubtitle}>
-          Upload any CSV file and get instant KPI cards, interactive charts,
-          and actionable insights. 100% local — your data never leaves your browser.
+          InsightBoard turns sales-style CSV files into a polished business dashboard in the
+          browser. No backend, no login, no data upload.
         </p>
-        <div className={styles.heroFeatures}>
-          <div className={styles.heroFeature}>
-            <svg
-              className={styles.heroFeatureIcon}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
+        <div className={styles.heroActions}>
+          <a className={styles.primaryAction} href="#upload-csv">
             Upload CSV
-          </div>
-          <div className={styles.heroFeature}>
-            <svg
-              className={styles.heroFeatureIcon}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-            See KPIs
-          </div>
-          <div className={styles.heroFeature}>
-            <svg
-              className={styles.heroFeatureIcon}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-            Explore Charts
-          </div>
-          <div className={styles.heroFeature}>
-            <svg
-              className={styles.heroFeatureIcon}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-            100% Local
-          </div>
+          </a>
+          <button className={styles.secondaryAction} type="button" onClick={onLoadDemo}>
+            View demo dataset
+          </button>
         </div>
+        <div className={styles.heroFeatures}>
+          {FEATURES.map((feature) => (
+            <div className={styles.heroFeature} key={feature}>
+              <svg
+                className={styles.heroFeatureIcon}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              {feature}
+            </div>
+          ))}
+        </div>
+        <p className={styles.privacyNote}>All parsing and analysis runs locally in your browser.</p>
       </div>
     </section>
   );

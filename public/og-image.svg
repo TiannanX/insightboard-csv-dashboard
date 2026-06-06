@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">InsightBoard CSV Dashboard</title>
+  <desc id="desc">Open graph preview for a local-first CSV dashboard starter.</desc>
+  <rect width="1200" height="630" fill="#FAFAFA"/>
+  <rect x="80" y="78" width="1040" height="474" rx="28" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <text x="130" y="158" fill="#2563EB" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" letter-spacing="2">INSIGHTBOARD</text>
+  <text x="130" y="240" fill="#111827" font-family="Inter, system-ui, sans-serif" font-size="62" font-weight="700">CSV Dashboard Starter</text>
+  <text x="130" y="302" fill="#6B7280" font-family="Inter, system-ui, sans-serif" font-size="30">KPIs, charts, local insights, and Markdown export.</text>
+  <g transform="translate(130 372)">
+    <rect width="180" height="92" rx="14" fill="#EFF6FF" stroke="#BFDBFE"/>
+    <rect x="210" width="180" height="92" rx="14" fill="#ECFDF5" stroke="#A7F3D0"/>
+    <rect x="420" width="180" height="92" rx="14" fill="#FFFBEB" stroke="#FDE68A"/>
+    <rect x="630" width="180" height="92" rx="14" fill="#F5F3FF" stroke="#DDD6FE"/>
+    <text x="24" y="38" fill="#1D4ED8" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Upload CSV</text>
+    <text x="234" y="38" fill="#047857" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Local-first</text>
+    <text x="444" y="38" fill="#B45309" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Insights</text>
+    <text x="654" y="38" fill="#6D28D9" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700">Export</text>
+  </g>
+</svg>

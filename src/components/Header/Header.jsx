@@ -27,6 +27,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.githubLink}
+            aria-label="View InsightBoard CSV Dashboard on GitHub"
           >
             <svg
               className={styles.githubIcon}

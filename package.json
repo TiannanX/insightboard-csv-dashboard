@@ -1,8 +1,28 @@
 {
   "name": "insightboard-csv-dashboard",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.2.0",
+  "description": "Local-first React CSV dashboard starter for KPIs, charts, rule-based insights, and Markdown exports.",
+  "license": "MIT",
+  "author": "TiannanX",
   "type": "module",
+  "homepage": "https://insightboard-csv-dashboard.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TiannanX/insightboard-csv-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TiannanX/insightboard-csv-dashboard/issues"
+  },
+  "keywords": [
+    "csv",
+    "dashboard",
+    "react",
+    "vite",
+    "recharts",
+    "papaparse",
+    "local-first",
+    "portfolio"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
