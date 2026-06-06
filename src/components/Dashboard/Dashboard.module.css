@@ -7,9 +7,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   flex-wrap: wrap;
   gap: var(--space-4);
+}
+
+.dashboardKicker {
+  margin-bottom: var(--space-1);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .dashboardTitle {
@@ -19,7 +33,11 @@
 }
 
 .dataSource {
-  margin-top: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
   font-size: 0.8125rem;
   color: var(--color-text-muted);
 }
@@ -27,6 +45,17 @@
 .dataSource span {
   color: var(--color-text-secondary);
   font-weight: 500;
+}
+
+.sourceBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-success-light);
+  color: #047857 !important;
+  font-size: 0.75rem;
+  font-weight: 700 !important;
 }
 
 .exportButton {
@@ -58,14 +87,33 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: var(--space-5);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 
 .chartsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-5);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+}
+
+.sectionHeader h3 {
+  margin-bottom: var(--space-1);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.sectionHeader p {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
 }
 
 @media (max-width: 1200px) {

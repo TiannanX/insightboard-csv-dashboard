@@ -26,6 +26,7 @@ const CHART_COLORS = ['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#0
 
 export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCategory, profitByRegion, topProducts }) {
   const insights = useMemo(() => generateInsights(data), [data]);
+  const isDemoData = dataSource === 'Demo sales dataset';
 
   const handleExport = () => {
     const summary = generateSummary(data, kpis);
@@ -45,10 +46,12 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
       <div className="container">
         <div className={styles.dashboardHeader}>
           <div>
+            <p className={styles.dashboardKicker}>Analysis workspace</p>
             <h2 className={styles.dashboardTitle}>Dashboard</h2>
             {dataSource && (
               <p className={styles.dataSource}>
-                Showing: <span>{dataSource}</span>
+                <span className={styles.sourceBadge}>{isDemoData ? 'Demo data' : 'Uploaded CSV'}</span>
+                <span>{dataSource}</span>
               </p>
             )}
           </div>
@@ -66,11 +69,18 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Export Summary
+            Export Markdown Summary
           </button>
         </div>
 
-        <div className={styles.kpiGrid}>
+        <div className={styles.sectionHeader}>
+          <div>
+            <h3>Executive Summary</h3>
+            <p>Core revenue, cost, profit, margin, unit, and record totals.</p>
+          </div>
+        </div>
+
+        <div className={styles.kpiGrid} aria-label="Key performance indicators">
           <KPICard
             label="Total Revenue"
             value={kpis.totalRevenue}
@@ -109,10 +119,17 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
           />
         </div>
 
+        <div className={styles.sectionHeader}>
+          <div>
+            <h3>Visual Analysis</h3>
+            <p>Four local charts generated from the parsed CSV rows.</p>
+          </div>
+        </div>
+
         <div className={styles.chartsGrid}>
           <ChartCard
             title="Revenue Over Time"
-            subtitle="Daily revenue trend"
+            subtitle="Daily revenue totals from valid rows"
             style={{ animationDelay: '300ms' }}
           >
             <ResponsiveContainer width="100%" height={280}>
@@ -163,7 +180,7 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
 
           <ChartCard
             title="Revenue by Category"
-            subtitle="Top categories by total revenue"
+            subtitle="Category mix ranked by revenue"
             style={{ animationDelay: '350ms' }}
           >
             <ResponsiveContainer width="100%" height={280}>
@@ -204,7 +221,7 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
 
           <ChartCard
             title="Profit by Region"
-            subtitle="Regional profit breakdown"
+            subtitle="Regional gross profit contribution"
             style={{ animationDelay: '400ms' }}
           >
             <ResponsiveContainer width="100%" height={280}>
@@ -242,7 +259,7 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
 
           <ChartCard
             title="Top Products"
-            subtitle="By revenue"
+            subtitle="Top five products by revenue"
             style={{ animationDelay: '450ms' }}
           >
             <ResponsiveContainer width="100%" height={280}>
@@ -281,6 +298,13 @@ export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCa
               </PieChart>
             </ResponsiveContainer>
           </ChartCard>
+        </div>
+
+        <div className={styles.sectionHeader}>
+          <div>
+            <h3>Local Insights</h3>
+            <p>Rule-based observations calculated in the browser.</p>
+          </div>
         </div>
 
         <InsightsPanel insights={insights} style={{ animationDelay: '500ms' }} />

@@ -81,6 +81,7 @@
 .tableInfo {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .tableWrapper {
@@ -147,6 +148,14 @@
 }
 
 .table tr:hover td {
+  background: var(--color-surface-hover);
+}
+
+.table tbody tr:nth-child(even) td {
+  background: rgba(250, 250, 250, 0.6);
+}
+
+.table tbody tr:nth-child(even):hover td {
   background: var(--color-surface-hover);
 }
 

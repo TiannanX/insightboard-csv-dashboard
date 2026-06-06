@@ -125,8 +125,9 @@ export function generateSummary(data, kpis) {
     day: 'numeric',
   });
 
-  let summary = `# Dashboard Summary\n\n`;
+  let summary = `# InsightBoard Dashboard Summary\n\n`;
   summary += `**Generated:** ${date}\n\n`;
+  summary += `This summary was generated locally in the browser from validated CSV rows.\n\n`;
   summary += `## Key Metrics\n\n`;
   summary += `- **Total Revenue:** ${formatCurrency(kpis.totalRevenue)}\n`;
   summary += `- **Total Cost:** ${formatCurrency(kpis.totalCost)}\n`;

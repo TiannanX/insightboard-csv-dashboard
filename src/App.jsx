@@ -44,7 +44,7 @@ function App() {
     <>
       <Header />
       <main>
-        <HeroSection />
+        <HeroSection onLoadDemo={handleLoadDemo} />
         <CSVUpload
           onFileUpload={handleFileUpload}
           onLoadDemo={handleLoadDemo}
@@ -67,8 +67,8 @@ function App() {
         ) : (
           !isParsing && (
             <EmptyState
-              title="No data loaded"
-              description="Upload a CSV file or load the demo dataset to see your dashboard."
+              title="Dashboard preview appears here"
+              description="Upload a valid CSV or load the demo dataset to generate KPIs, charts, insights, and a row preview."
             />
           )
         )}
