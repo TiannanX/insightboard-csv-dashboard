@@ -1,0 +1,26 @@
+.emptyState {
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  color: var(--color-border);
+  margin: 0 auto var(--space-6);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.description {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  max-width: 400px;
+  margin: 0 auto var(--space-6);
+  line-height: 1.6;
+}
