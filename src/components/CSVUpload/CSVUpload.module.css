@@ -48,12 +48,18 @@
 .dropzoneText {
   font-size: 0.875rem;
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .dropzoneLink {
   color: var(--color-primary);
   font-weight: 500;
+}
+
+.schemaHint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
 }
 
 .fileInput {
@@ -119,6 +125,30 @@
   width: 16px;
   height: 16px;
   flex-shrink: 0;
+}
+
+.warning {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-warning-light);
+  border-radius: var(--radius-md);
+  color: #92400e;
+  font-size: 0.8125rem;
+}
+
+.warning strong {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: #78350f;
+}
+
+.warning ul {
+  margin: 0;
+  padding-left: var(--space-5);
+}
+
+.warning li + li {
+  margin-top: var(--space-1);
 }
 
 .parsing {

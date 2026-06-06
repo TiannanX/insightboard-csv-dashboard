@@ -1,5 +1,7 @@
 import styles from './Header.module.css';
 
+const GITHUB_REPO_URL = 'https://github.com/TiannanX/insightboard-csv-dashboard';
+
 export function Header() {
   return (
     <header className={styles.header}>
@@ -21,7 +23,7 @@ export function Header() {
         </div>
         <nav className={styles.nav}>
           <a
-            href="https://github.com"
+            href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.githubLink}

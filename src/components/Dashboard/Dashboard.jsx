@@ -24,7 +24,7 @@ import { formatCurrency } from '../../utils/formatters';
 
 const CHART_COLORS = ['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899', '#06B6D4'];
 
-export function Dashboard({ data, kpis, revenueOverTime, revenueByCategory, profitByRegion, topProducts }) {
+export function Dashboard({ data, dataSource, kpis, revenueOverTime, revenueByCategory, profitByRegion, topProducts }) {
   const insights = useMemo(() => generateInsights(data), [data]);
 
   const handleExport = () => {
@@ -44,7 +44,14 @@ export function Dashboard({ data, kpis, revenueOverTime, revenueByCategory, prof
     <section className={styles.dashboard}>
       <div className="container">
         <div className={styles.dashboardHeader}>
-          <h2 className={styles.dashboardTitle}>Dashboard</h2>
+          <div>
+            <h2 className={styles.dashboardTitle}>Dashboard</h2>
+            {dataSource && (
+              <p className={styles.dataSource}>
+                Showing: <span>{dataSource}</span>
+              </p>
+            )}
+          </div>
           <button className={styles.exportButton} onClick={handleExport}>
             <svg
               className={styles.exportIcon}

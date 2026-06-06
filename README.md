@@ -13,9 +13,17 @@ Turn your CSV data into a beautiful dashboard in seconds. No uploads, no servers
 - **100% Local** — All data processing happens in your browser. Nothing is uploaded.
 - **Responsive** — Works on desktop, tablet, and mobile
 
+## Live Demo
+
+Live demo URL: `TODO: add deployed Vercel URL`
+
+## GitHub Repository
+
+Repository URL: `https://github.com/TiannanX/insightboard-csv-dashboard`
+
 ## Tech Stack
 
-- **React 18** + **Vite** — Fast development and optimized builds
+- **React 19** + **Vite** — Fast development and optimized builds
 - **Recharts** — Beautiful, responsive charts
 - **Papa Parse** — Robust CSV parsing
 - **CSS Modules** — Scoped, maintainable styles
@@ -31,27 +39,45 @@ Your data stays on your device. This dashboard:
 
 All CSV processing happens locally in your browser using JavaScript.
 
-## Sample CSV Format
+## CSV Schema
 
-Your CSV should include these columns:
+Your CSV must include these required columns:
+
+| Column | Type | Required | Notes |
+|--------|------|----------|-------|
+| `date` | Date string | Yes | ISO dates like `2024-01-01` are recommended. Browser-parseable date strings are accepted. |
+| `product` | Text | Yes | Empty values are invalid. |
+| `category` | Text | Yes | Empty values are invalid. |
+| `region` | Text | Yes | Empty values are invalid. |
+| `revenue` | Number | Yes | Currency symbols and commas are accepted, for example `$1,200`. Invalid numbers are skipped. |
+| `cost` | Number | Yes | Currency symbols and commas are accepted. Invalid numbers are skipped. |
+| `units` | Number | Yes | Must be numeric. |
+
+Valid sample row:
 
 ```csv
 date,product,category,region,revenue,cost,units
 2024-01-01,Widget A,Electronics,North,1200,480,24
-2024-01-01,Gadget Pro,Electronics,South,890,356,15
 ```
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `date` | String | Date in ISO or MM/DD/YYYY format |
-| `product` | String | Product name |
-| `category` | String | Product category |
-| `region` | String | Sales region |
-| `revenue` | Number | Revenue amount |
-| `cost` | Number | Cost amount |
-| `units` | Number | Units sold |
+Invalid examples:
+
+- Missing required column: no `cost` header.
+- Invalid date: `not-a-date,Widget A,Electronics,North,1200,480,24`.
+- Invalid number: `2024-01-01,Widget A,Electronics,North,N/A,480,24`.
+- Empty required text value: `2024-01-01,,Electronics,North,1200,480,24`.
+
+Rows with invalid dates, invalid numbers, or empty required text fields are skipped and reported in the app. Files with no valid rows are rejected with a clear error.
 
 A sample CSV file is included at `public/sample-sales-data.csv`.
+
+## Troubleshooting
+
+- **Empty file**: Make sure the CSV includes a header row and at least one data row.
+- **Missing columns**: Confirm the headers include `date`, `product`, `category`, `region`, `revenue`, `cost`, and `units`.
+- **Invalid numbers**: Use plain numbers or currency-style values such as `1200`, `1,200`, or `$1,200`.
+- **Invalid dates**: Prefer ISO format like `2024-01-01`.
+- **Skipped rows**: The app keeps valid rows and shows a validation note for skipped invalid rows.
 
 ## Setup
 
@@ -139,7 +165,7 @@ Potential enhancements for this starter:
 - [ ] **Export Data** — Export processed data as CSV
 - [ ] **Dark Mode** — Toggle between light/dark themes
 - [ ] **Saved Views** — Save and load filter configurations
-- [ ] **AI Insights** — Optional OpenAI integration for richer analysis
+- [ ] **Optional AI Extension** — A future opt-in extension could add AI-assisted insights, but the default app should remain local-first with no paid APIs or secrets.
 - [ ] **More Sample Data** — Finance, marketing, operations datasets
 - [ ] **PWA Support** — Install as desktop app
 - [ ] **Multi-file** — Compare multiple CSV files

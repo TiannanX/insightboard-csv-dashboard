@@ -18,6 +18,17 @@
   color: var(--color-text);
 }
 
+.dataSource {
+  margin-top: var(--space-1);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.dataSource span {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
 .exportButton {
   display: flex;
   align-items: center;
