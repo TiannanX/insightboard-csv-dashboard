@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import styles from './CSVUpload.module.css';
+import { REQUIRED_COLUMNS } from '../../utils/sampleData';
 
-export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error }) {
+export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error, warnings = [] }) {
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -38,6 +39,7 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error }) {
     if (files && files.length > 0) {
       onFileUpload(files[0]);
     }
+    e.target.value = '';
   };
 
   const handleClick = () => {
@@ -85,6 +87,9 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error }) {
             <p className={styles.dropzoneText}>
               or <span className={styles.dropzoneLink}>browse</span> to choose a file
             </p>
+            <p className={styles.schemaHint}>
+              Required columns: {REQUIRED_COLUMNS.join(', ')}
+            </p>
             <input
               ref={fileInputRef}
               type="file"
@@ -95,14 +100,14 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error }) {
           </div>
 
           {isParsing && (
-            <div className={styles.parsing}>
+            <div className={styles.parsing} aria-live="polite">
               <div className={styles.spinner} />
               <p>Parsing your data...</p>
             </div>
           )}
 
           {error && (
-            <div className={styles.error}>
+            <div className={styles.error} role="alert">
               <svg
                 className={styles.errorIcon}
                 viewBox="0 0 24 24"
@@ -117,6 +122,17 @@ export function CSVUpload({ onFileUpload, onLoadDemo, isParsing, error }) {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
               {error}
+            </div>
+          )}
+
+          {warnings.length > 0 && (
+            <div className={styles.warning} role="status" aria-live="polite">
+              <strong>Validation note:</strong>
+              <ul>
+                {warnings.map((warning) => (
+                  <li key={warning}>{warning}</li>
+                ))}
+              </ul>
             </div>
           )}
 

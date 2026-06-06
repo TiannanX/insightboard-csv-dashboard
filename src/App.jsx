@@ -11,22 +11,32 @@ import { SAMPLE_SALES_DATA } from './utils/sampleData';
 
 function App() {
   const [data, setData] = useState(null);
+  const [dataSource, setDataSource] = useState(null);
+  const [validationWarnings, setValidationWarnings] = useState([]);
   const { parseFile, isParsing, error, clearError } = useCSVParser();
+  const dashboardData = data?.data || null;
   const { kpis, revenueOverTime, revenueByCategory, profitByRegion, topProducts } =
-    useDashboardData(data);
+    useDashboardData(dashboardData);
 
   const handleFileUpload = useCallback(async (file) => {
     try {
       const parsedData = await parseFile(file);
       setData(parsedData);
+      setDataSource(file.name);
+      setValidationWarnings(parsedData.warnings);
       clearError();
     } catch {
       // Error is handled by the hook
+      setData(null);
+      setDataSource(null);
+      setValidationWarnings([]);
     }
   }, [parseFile, clearError]);
 
   const handleLoadDemo = useCallback(() => {
-    setData(SAMPLE_SALES_DATA);
+    setData({ data: SAMPLE_SALES_DATA, warnings: [] });
+    setDataSource('Demo sales dataset');
+    setValidationWarnings([]);
     clearError();
   }, [clearError]);
 
@@ -41,11 +51,13 @@ function App() {
           isParsing={isParsing}
           error={error}
           onClearError={clearError}
+          warnings={validationWarnings}
         />
 
-        {data && data.length > 0 ? (
+        {dashboardData && dashboardData.length > 0 ? (
           <Dashboard
-            data={data}
+            data={dashboardData}
+            dataSource={dataSource}
             kpis={kpis}
             revenueOverTime={revenueOverTime}
             revenueByCategory={revenueByCategory}

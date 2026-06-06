@@ -51,6 +51,26 @@ export const SAMPLE_SALES_DATA = [
 
 export const REQUIRED_COLUMNS = ['date', 'product', 'category', 'region', 'revenue', 'cost', 'units'];
 export const NUMERIC_COLUMNS = ['revenue', 'cost', 'units'];
+export const TEXT_COLUMNS = ['product', 'category', 'region'];
+
+function parseNumber(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return null;
+
+  const normalized = raw.replace(/[$,]/g, '');
+  if (!/^-?\d+(\.\d+)?$/.test(normalized)) return null;
+
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function isValidDate(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return false;
+
+  const parsed = new Date(raw);
+  return !Number.isNaN(parsed.getTime());
+}
 
 export function validateData(data) {
   if (!data || data.length === 0) {
@@ -72,20 +92,62 @@ export function validateData(data) {
     if (target) columnMap[key] = target;
   });
 
-  const normalizedData = data.map(row => {
+  const warnings = [];
+  const normalizedData = [];
+  let skippedRows = 0;
+
+  data.forEach((row, index) => {
     const newRow = {};
     Object.entries(row).forEach(([key, value]) => {
       const normalizedKey = columnMap[key] || key;
-      newRow[normalizedKey] = value;
+      newRow[normalizedKey] = typeof value === 'string' ? value.trim() : value;
     });
-    // Parse numeric values
-    NUMERIC_COLUMNS.forEach(col => {
-      if (newRow[col] !== undefined) {
-        newRow[col] = parseFloat(String(newRow[col]).replace(/[,$]/g, '')) || 0;
+
+    const rowNumber = index + 2;
+    const rowIssues = [];
+
+    if (!isValidDate(newRow.date)) {
+      rowIssues.push('invalid date');
+    }
+
+    TEXT_COLUMNS.forEach(col => {
+      if (!String(newRow[col] ?? '').trim()) {
+        rowIssues.push(`missing ${col}`);
       }
     });
-    return newRow;
+
+    NUMERIC_COLUMNS.forEach(col => {
+      const parsed = parseNumber(newRow[col]);
+      if (parsed === null) {
+        rowIssues.push(`invalid ${col}`);
+      } else {
+        newRow[col] = parsed;
+      }
+    });
+
+    if (rowIssues.length > 0) {
+      skippedRows += 1;
+      if (warnings.length < 5) {
+        warnings.push(`Row ${rowNumber} skipped: ${rowIssues.join(', ')}`);
+      }
+      return;
+    }
+
+    normalizedData.push(newRow);
   });
 
-  return { valid: true, data: normalizedData };
+  if (normalizedData.length === 0) {
+    return {
+      valid: false,
+      error: 'No valid rows found. Check required text values, dates, and numeric columns.',
+    };
+  }
+
+  if (skippedRows > 0) {
+    warnings.unshift(
+      `${skippedRows} invalid ${skippedRows === 1 ? 'row was' : 'rows were'} skipped.`
+    );
+  }
+
+  return { valid: true, data: normalizedData, warnings };
 }

@@ -47,7 +47,10 @@ export function useCSVParser() {
           }
 
           setIsParsing(false);
-          resolve(validation.data);
+          resolve({
+            data: validation.data,
+            warnings: validation.warnings || [],
+          });
         },
         error: (err) => {
           setError('Failed to read file');

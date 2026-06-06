@@ -59,6 +59,11 @@ export function DataTable({ data, style }) {
 
   const displayData = sortedData.slice(0, MAX_DISPLAY_ROWS);
 
+  const getSortLabel = (col) => {
+    if (sortKey !== col.key) return `Sort by ${col.label}`;
+    return `Sort by ${col.label} ${sortDir === 'asc' ? 'descending' : 'ascending'}`;
+  };
+
   const formatCell = (value, key) => {
     if (value === null || value === undefined) return '—';
 
@@ -95,6 +100,9 @@ export function DataTable({ data, style }) {
         <h3 className={styles.title}>Data Explorer</h3>
         <div className={styles.controls}>
           <div className={styles.searchWrapper}>
+            <label className={styles.searchLabel} htmlFor="data-table-search">
+              Search data
+            </label>
             <svg
               className={styles.searchIcon}
               viewBox="0 0 24 24"
@@ -108,6 +116,7 @@ export function DataTable({ data, style }) {
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
             </svg>
             <input
+              id="data-table-search"
               type="text"
               className={styles.searchInput}
               placeholder="Search data..."
@@ -128,27 +137,39 @@ export function DataTable({ data, style }) {
               {COLUMNS.map((col) => (
                 <th
                   key={col.key}
-                  onClick={() => handleSort(col.key)}
+                  aria-sort={
+                    sortKey === col.key
+                      ? (sortDir === 'asc' ? 'ascending' : 'descending')
+                      : 'none'
+                  }
                   className={col.numeric ? styles.numeric : ''}
                 >
-                  {col.label}
-                  <svg
-                    className={`${styles.sortIcon} ${
-                      sortKey === col.key ? styles.sortIconActive : ''
-                    }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                  <button
+                    type="button"
+                    className={`${styles.sortButton} ${col.numeric ? styles.sortButtonNumeric : ''}`}
+                    onClick={() => handleSort(col.key)}
+                    aria-label={getSortLabel(col)}
                   >
-                    {sortKey === col.key && sortDir === 'asc' ? (
-                      <polyline points="18 15 12 9 6 15" />
-                    ) : (
-                      <polyline points="6 9 12 15 18 9" />
-                    )}
-                  </svg>
+                    {col.label}
+                    <svg
+                      className={`${styles.sortIcon} ${
+                        sortKey === col.key ? styles.sortIconActive : ''
+                      }`}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      {sortKey === col.key && sortDir === 'asc' ? (
+                        <polyline points="18 15 12 9 6 15" />
+                      ) : (
+                        <polyline points="6 9 12 15 18 9" />
+                      )}
+                    </svg>
+                  </button>
                 </th>
               ))}
             </tr>
