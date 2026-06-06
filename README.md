@@ -10,7 +10,7 @@ This project is built as a polished open-source starter and freelance portfolio 
 
 ## Live Demo
 
-Live demo URL: `TODO: add deployed Vercel URL`
+Live demo URL: `https://insightboard-csv-dashboard.vercel.app`
 
 ## GitHub Repository
 
